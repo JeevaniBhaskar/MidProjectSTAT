@@ -1,0 +1,23 @@
+{
+  "index.qmd": {
+    "index.html": "25c5d1a4"
+  },
+  "about.qmd": {
+    "about.html": "592ba195"
+  },
+  "Redesign.qmd": {
+    "Redesign.html": "6551a865"
+  },
+  "code.qmd": {
+    "code.html": "2450d51a"
+  },
+  "Map.qmd": {
+    "Map.html": "a5be0c0c"
+  },
+  "Plots_code.Rmd": {
+    "Plots_code.html": "669b9f7a"
+  },
+  "reference.qmd": {
+    "reference.html": "753eb8f2"
+  }
+}

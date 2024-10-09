@@ -1,0 +1,5 @@
+"1","NULL
+"
+"0","# Save plot as an HTML file"
+"0","saveWidget(plotly_plot, ""interactive_plot.html"", selfcontained = TRUE)"
+"0",""
