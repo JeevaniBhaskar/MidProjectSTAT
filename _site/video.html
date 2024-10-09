@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R Code – Mid Project</title>
+<title>Video Link – Mid Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Map</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./code.html" aria-current="page"> 
+    <a class="nav-link" href="./code.html"> 
 <span class="menu-text">Code</span></a>
   </li>  
   <li class="nav-item">
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./video.html"> 
+    <a class="nav-link active" href="./video.html" aria-current="page"> 
 <span class="menu-text">Video Link</span></a>
   </li>  
 </ul>
@@ -128,16 +128,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#code-for-visualizing-the-negative-economic-impact-of-covid-19-on-tourism" id="toc-code-for-visualizing-the-negative-economic-impact-of-covid-19-on-tourism" class="nav-link active" data-scroll-target="#code-for-visualizing-the-negative-economic-impact-of-covid-19-on-tourism">Code for visualizing the negative economic impact of COVID-19 on tourism</a>
-  <ul class="collapse">
-  <li><a href="#plot-1" id="toc-plot-1" class="nav-link" data-scroll-target="#plot-1">Plot 1</a></li>
-  <li><a href="#plot-2" id="toc-plot-2" class="nav-link" data-scroll-target="#plot-2">Plot 2</a></li>
-  </ul></li>
-  <li><a href="#code-for-list-of-countries-and-dependencies-by-population" id="toc-code-for-list-of-countries-and-dependencies-by-population" class="nav-link" data-scroll-target="#code-for-list-of-countries-and-dependencies-by-population">Code for List of Countries and Dependencies by Population</a>
-  <ul class="collapse">
-  <li><a href="#plot-1-1" id="toc-plot-1-1" class="nav-link" data-scroll-target="#plot-1-1">Plot 1</a></li>
-  <li><a href="#plot-2-1" id="toc-plot-2-1" class="nav-link" data-scroll-target="#plot-2-1">Plot 2</a></li>
-  </ul></li>
+  <li><a href="#video-presentation-link" id="toc-video-presentation-link" class="nav-link active" data-scroll-target="#video-presentation-link">Video presentation link</a></li>
   </ul>
 </nav>
     </div>
@@ -146,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R Code</h1>
+<h1 class="title">Video Link</h1>
 </div>
 
 
@@ -163,180 +154,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="code-for-visualizing-the-negative-economic-impact-of-covid-19-on-tourism" class="level2">
-<h2 class="anchored" data-anchor-id="code-for-visualizing-the-negative-economic-impact-of-covid-19-on-tourism">Code for visualizing the negative economic impact of COVID-19 on tourism</h2>
-<section id="plot-1" class="level3">
-<h3 class="anchored" data-anchor-id="plot-1">Plot 1</h3>
-<p>#Reading the csv file into a variable called data</p>
-<p>data = read.csv(“Data.csv”)</p>
-<p>#Filtering the data for the years 2019 and 2020</p>
-<p>data_filtered = data[data$Year %in% c(2019, 2020), ]</p>
-<p>#Loading the necessary libraries, ggplot2 and plotly</p>
-<p>library(ggplot2)</p>
-<p>library(plotly)</p>
-<p>#Assigning the graph to a variable called plot1. Initializing ggplot and defining the asthetics. geom_bar adds the bar chart to the plot. Year is converted as factor and the bars are filled with colors based on the year</p>
-<p>plot1 = ggplot(data_filtered, aes(x = Country, y = Loss.in.Billion, fill = as.factor(Year))) + geom_bar(stat = “identity”, position = “dodge”) +</p>
-<p>#goem_text adds the labels to the plot. asthetics are defined and the width of the txt labels is adjusted using position_dodge.</p>
-<p>geom_text(aes(label = Loss.in.Billion), position = position_dodge(width = 0.9), vjust = -0.5) + # Adjust vertical position of labels</p>
-<p>#scale_fill_manual is used to set the colors manually</p>
-<p>scale_fill_manual(values = c(“2019” = “purple”, “2020” = “yellow”)) +</p>
-<p>#labs is used to add the labels and title to the chart. Theme customizes the appearance of the plot.</p>
-<p>labs(title = “Loss Comparison by Country for 2019 and 2020”, x = “Country”, y = “Loss in Billion”, fill = “Year”) + theme(axis.text.x = element_text(angle = 45, hjust = 1))</p>
-<p>#Converting plot1 to an interactive plotly object using ggplotly</p>
-<p>plotly_plot = ggplotly(plot1)</p>
-<p>#printing the plot</p>
-<p>print(plotly_plot)</p>
-</section>
-<section id="plot-2" class="level3">
-<h3 class="anchored" data-anchor-id="plot-2">Plot 2</h3>
-<p>#loading the necessary libraries tidyr, dplyr</p>
-<p>library(tidyr)</p>
-<p>library(dplyr)</p>
-<p>#Reshaping the data</p>
-<p>data_diff = spread(data_filtered, Year, Loss.in.Billion)</p>
-<p>#Taking the absolute difference between the years and calculating the loss percentage</p>
-<p>data_diff$Loss_Percentage &lt;- (abs(data_diff$<code>2020</code> - data_diff$`2019`) / data_diff$<code>2019</code>) * 100</p>
-<p>#Assigning the graph to a variable called plot2. Initializing ggplot and defining the asthetics. reorder() function arranges the countries in ascending orderof their loss percentage.</p>
-<p>plot2 = ggplot(data_diff, aes(x = reorder(Country, Loss_Percentage), y = Loss_Percentage, fill = Loss_Percentage)) +</p>
-<p>#geom_bar adds the bar chart to the plot. stat = “identity adds the bars heights corresponds to the values of loss_percenatge. scale_fill_gradient() adds continuous color gradient for bars with lower to higher loss percentage,</p>
-<p>geom_bar(stat = “identity”) + scale_fill_gradient(low = “lightblue”, high = “darkblue”) +</p>
-<p>#Adding lables, title and customized theme</p>
-<p>labs(title = “Comparative Analysis of Loss by Country in Percentage”, x = “Country”, y = “Loss (%)”) + label theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +</p>
-<p>#Adding text labels to the bars. Adjusting the verticle position of the labels using vjust and adding color. The loss_percentage displayed is rounded to one decimal place.</p>
-<p>geom_text(aes(label = round(Loss_Percentage, 1)), vjust = -0.5, color = “black”) # Add values on top of the bars print(plot2)</p>
-</section>
-</section>
-<section id="code-for-list-of-countries-and-dependencies-by-population" class="level2">
-<h2 class="anchored" data-anchor-id="code-for-list-of-countries-and-dependencies-by-population">Code for List of Countries and Dependencies by Population</h2>
-<section id="plot-1-1" class="level3">
-<h3 class="anchored" data-anchor-id="plot-1-1">Plot 1</h3>
-<p>#install all the required libraries</p>
-<p>library(leaflet)</p>
-<p>library(dplyr)</p>
-<p>library(readr)</p>
-<p>library(sf)</p>
-<p>library(RColorBrewer)</p>
-<p>library(htmltools)</p>
-<p>#reading the CSV file</p>
-<p>data &lt;- read_csv(“countries_population.csv”,show_col_types = FALSE)</p>
-<p>#Cleaning the CSV file</p>
-<p>data$Location &lt;- gsub(“_”, ” “, data$Location)</p>
-<p>#Creating the intervals</p>
-<p>bins &lt;- c(0, 100000, 200000, 300000, 500000,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3000000, 5000000, 9000000, 11000000,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 16000000, 20000000, 25000000, 40000000,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 60000000, 67000000, 90000000, 200000000,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400000000, 1500000001)</p>
-<p>#Legend</p>
-<p>labels &lt;- c(</p>
-<p>&nbsp; “0 - 100,000”,</p>
-<p>&nbsp; “100,001 - 200,000”,</p>
-<p>&nbsp; “200,001 - 300,000”,</p>
-<p>&nbsp; “300,001 - 500,000”,</p>
-<p>&nbsp; “500,001 - 3,000,000”,</p>
-<p>&nbsp; “3,000,001 - 5,000,000”,</p>
-<p>&nbsp; “5,000,001 - 9,000,000”,</p>
-<p>&nbsp; “9,000,001 - 11,000,000”,</p>
-<p>&nbsp; “11,000,001 - 16,000,000”,</p>
-<p>&nbsp; “16,000,001 - 20,000,000”,</p>
-<p>&nbsp; “20,000,001 - 25,000,000”,</p>
-<p>&nbsp; “25,000,001 - 40,000,000”,</p>
-<p>&nbsp; “40,000,001 - 60,000,000”,</p>
-<p>&nbsp; “60,000,001 - 67,000,000”,</p>
-<p>&nbsp; “67,000,001 - 90,000,000”,</p>
-<p>&nbsp; “90,000,001 - 200,000,000”,</p>
-<p>&nbsp; “200,000,001 - 400,000,000”,</p>
-<p>&nbsp; “400,000,001 - 1,500,000,001”</p>
-<p>)</p>
-<p>data$population_group &lt;- cut(data$Population, breaks = bins,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include.lowest = TRUE,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; labels = labels)</p>
-<p># We need colours for the number of intervels we have</p>
-<p>num_colors &lt;- length(labels)</p>
-<p>color_palette &lt;- colorRampPalette(brewer.pal(9, “Blues”))&nbsp;</p>
-<p>colors &lt;- color_palette(num_colors)</p>
-<p>#Importing the world dataset</p>
-<p>world &lt;- st_as_sf(maps::map(“world”, fill = TRUE, plot = FALSE))</p>
-<p>#Left joining the world dataset with our.</p>
-<p>world_data &lt;- world %&gt;%</p>
-<p>&nbsp; left_join(data, by = c(“ID” = “Location”)) %&gt;%</p>
-<p>&nbsp; mutate(color = colors[as.numeric(cut(Population, breaks = bins, include.lowest = TRUE))])</p>
-<p># Visual 1</p>
-<p>leaflet_map &lt;- leaflet(world_data) %&gt;%</p>
-<p>&nbsp; addTiles() %&gt;%</p>
-<p>&nbsp; setView(lng = 0, lat = 20, zoom = 2) %&gt;%</p>
-<p>&nbsp; addPolygons(fillColor = ~color,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; weight = 1,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opacity = 1,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; color = ‘white’,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dashArray = ‘3’,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fillOpacity = 0.7,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; highlightOptions = highlightOptions(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; weight = 5,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; color = ‘#666’,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dashArray = ’’,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fillOpacity = 0.7,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bringToFront = TRUE),</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label = ~paste(ID, “&lt;br&gt;”,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “Population:”, Population, “&lt;br&gt;”,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “% of World:”, `%_ofworld`),</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; labelOptions = labelOptions(style = list(‘font-weight’ = ‘normal’,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding = ‘3px 8px’),</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; textsize = “15px”,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; direction = “auto”)) %&gt;%</p>
-<p>&nbsp; addLegend(pal = colorFactor(colors, NULL),</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values = ~population_group,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; labels = labels,&nbsp; # Update labels to show intervals</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; opacity = 0.7,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; title = “Population Groups”, position = “bottomright”)</p>
-<p>leaflet_map</p>
-</section>
-<section id="plot-2-1" class="level3">
-<h3 class="anchored" data-anchor-id="plot-2-1">Plot 2</h3>
-<p>#Loading the libraries</p>
-<p>library(dplyr)</p>
-<p>library(purrr)</p>
-<p>library(highcharter)</p>
-<p>data1 &lt;- read.csv(“countries_population_continents.csv”)</p>
-<p># Group the data by continent and summarize the total population for each continent</p>
-<p>by_continent &lt;- data1 %&gt;%</p>
-<p>&nbsp; group_by(Continent) %&gt;%</p>
-<p>&nbsp; summarise(Population = sum(Population, na.rm = TRUE), .groups = ‘drop’)</p>
-<p>#Prepare drilldown data for Africa</p>
-<p>drilldown_chart_data &lt;- data1 %&gt;%</p>
-<p>&nbsp; filter(Continent == “Africa”) %&gt;%</p>
-<p>&nbsp; select(Location, Population) %&gt;%</p>
-<p>&nbsp; mutate(</p>
-<p>&nbsp;&nbsp;&nbsp; name = Location,</p>
-<p>&nbsp;&nbsp;&nbsp; y = Population</p>
-<p>&nbsp; ) %&gt;%</p>
-<p>&nbsp; select(name, y) %&gt;%</p>
-<p>&nbsp; list_parse()&nbsp;</p>
-<p># Create the main Highcharts visualization</p>
-<p>highchart() %&gt;%</p>
-<p>&nbsp; hc_chart(type = “column”) %&gt;%</p>
-<p>&nbsp; hc_title(text = “Population Drilldown by Continent and Country”) %&gt;%</p>
-<p>&nbsp; hc_subtitle(text = “Click a continent to see the countries”) %&gt;%</p>
-<p>&nbsp; hc_xAxis(type = “category”) %&gt;%</p>
-<p>&nbsp; hc_yAxis(title = list(text = “Population”)) %&gt;%</p>
-<p>&nbsp; # Add the main series for continents</p>
-<p>&nbsp; hc_add_series(</p>
-<p>&nbsp;&nbsp;&nbsp; name = “Total Population”,</p>
-<p>&nbsp;&nbsp;&nbsp; data = by_continent %&gt;%</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mutate(drilldown = Continent) %&gt;%</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; select(name = Continent, y = Population, drilldown)</p>
-<p>&nbsp; ) %&gt;%</p>
-<p>&nbsp; # the drilldown feature for Africa</p>
-<p>&nbsp; hc_drilldown(series = list(</p>
-<p>&nbsp;&nbsp;&nbsp; list(</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; id = “Africa”,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name = “Countries”,</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data = drilldown_chart_data</p>
-<p>&nbsp;&nbsp;&nbsp; )</p>
-<p>&nbsp; ))</p>
+<section id="video-presentation-link" class="level2">
+<h2 class="anchored" data-anchor-id="video-presentation-link">Video presentation link</h2>
+<p>Below is the link to the video presentation of the website, which explains the visualizations and the redesigns in detail.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

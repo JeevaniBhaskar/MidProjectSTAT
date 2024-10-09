@@ -3,7 +3,7 @@
     "path": "C:/Users/jeeva/OneDrive/Desktop/STAT - First sem/Mid Project/Mid Project/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "1167884722",
+    "hash": "2385197205",
     "contents": "",
     "dirty": false,
     "created": 1728412461339.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "23,0",
+        "cursorPosition": "18,24",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1728490429,
+    "lastKnownWriteTime": 1728493302,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1728490429944,
+    "last_content_update": 1728493302714,
     "read_only": false,
     "read_only_alternatives": []
 }
